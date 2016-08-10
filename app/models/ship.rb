@@ -1,19 +1,21 @@
 class Ship
-  attr_accessor :name, :type, :booty
+  attr_accessor :name, :type, :booty, :pirate
 
-  SHIPS = []
+  @@ships = []
 
   def initialize(params)
-    @name = params[:name]
-    @type = params[:type]
-    @booty = params[:booty]
+    params.each do |key, value|
+      self.send(("#{key}="), value)
+    end
+
+    @@ships << self
   end
 
   def self.all
-    SHIPS.dup.freeze
+    @@ships
   end
 
   def self.clear
-    SHIPS.clear
+    @@ships.clear
   end
 end
